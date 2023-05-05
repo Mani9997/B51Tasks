@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Guvi JS Day 3</title>
+</head>
+<body>
+    <h1>hello</h1>
+    <h2>this is an example for XML HTTP Request</h2>
+    <script>
+
+        const xhr = new XMLHttpRequest();
+        
+        xhr.open("GET","https://restcountries.com/v3.1/all")
+        xhr.onload = function() {
+            let data = JSON.parse(xhr.response);
+            for(let index=0; index<data.length; index++){
+               console.log(data[index].population);
+            }
+         // console.log((data.map((country) => country.name)).join(' '));
+        }
+
+    
+        xhr.send();
+    </script>
+</body>
+</html>
