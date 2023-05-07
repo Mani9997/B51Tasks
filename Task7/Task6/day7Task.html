@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Guvi JS Day 3</title>
+</head>
+<body>
+    <h1>hello</h1>
+    <h2>this is an example for XML HTTP Request</h2>
+    <script>
+
+        const xhr = new XMLHttpRequest();
+        
+        xhr.open("GET","https://restcountries.com/v3.1/all")
+        xhr.onload = function() {
+           
+             let data = JSON.parse(xhr.response);
+             //a. Get all the countries from the asia continent/region using the filter function:
+
+             let asian = data.filter((element) => element.region == "Asia");
+             console.log(asian);
+
+            //b. Get all the countries with a population of less than 2 lakhs using filter function:
+
+             let population = data.filter((element) => element.population<200000);
+               console.log(population);
+
+            //c.Print the following details name, capital,flag using foreach function:
+
+             data.forEach(element => console.log(`country Name:${element.name}; capital:${element.capital}; flag:${element.flag}`));
+                
+           //d.Print the total population of counties using reduse function:
+
+            let tpop = data.reduce ((acc,cv)=>acc+cv.population,0)
+            console.log("Total country population is:" +tpop);
+
+           //e.Print the country which uses US dollars as currency:
+
+           let currency = data.filter((item)=>item?.currencies?.USD).map((value)=>value.name);
+           console.log(currency);
+
+        }
+
+            
+        
+        
+        xhr.send();
+    </script>
+</body>
+</html>
